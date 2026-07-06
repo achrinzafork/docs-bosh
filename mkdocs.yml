@@ -19,10 +19,13 @@ nav:
   - Quick Start: quick-start.md
   - Alibaba Cloud: init-alicloud.md
   - Amazon Web Services: init-aws.md
+  - Docker: init-docker.md
   - Google Cloud Platform: init-google.md
   - Microsoft Azure: init-azure.md
   - OpenStack: init-openstack.md
-  - VirtualBox: bosh-lite.md
+  - VirtualBox:
+    - Linux / macOS: bosh-lite.md
+    - WSL 2: bosh-lite-wsl2.md
   - VMware vSphere: init-vsphere.md
 - Guides:
   - Deploying Software:

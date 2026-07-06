@@ -1,6 +1,15 @@
-BOSH Lite v2 is a Director VM running in VirtualBox (typically locally). It is managed via [CLI v2](cli-v2.md). Internally CPI uses containers to emulate VMs which makes it an excellent choice for:
+# VirtualBox (Linux / macOS)
 
-- General BOSH exploration without investing time and resources to configure an IaaS
+!!! note
+
+    The Docker CPI is the new recommended way for local development.
+
+BOSH Lite v2 is a Director VM running in VirtualBox (typically locally). It is
+managed via [CLI v2](cli-v2.md). Internally CPI uses containers to emulate VMs
+which makes it an excellent choice for:
+
+- General BOSH exploration without investing time and resources to configure
+  an IaaS
 - Development of releases (including BOSH itself)
 - Testing releases locally or in CI
 
@@ -9,7 +18,8 @@ BOSH Lite v2 is a Director VM running in VirtualBox (typically locally). It is m
 
 Follow below steps to get it running on locally on VirtualBox:
 
-1. Check that your machine has at least 8GB RAM, and 100GB free disk space. Smaller configurations may work.
+1. Check that your machine has at least 8GB RAM, and 100GB free disk
+   space. Smaller configurations may work.
 
 2. Install [CLI v2](cli-v2-install.md)
 
@@ -22,10 +32,18 @@ Follow below steps to get it running on locally on VirtualBox:
     # 5.1...
     ```
 
-    Note: If you encounter problems with VirtualBox networking try installing [Oracle VM VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads) as suggested by [Issue 202](https://github.com/cloudfoundry/bosh-lite/issues/202). Alternatively make sure you are on VirtualBox 5.1+ since previous versions had a [network connectivity bug](https://github.com/concourse/concourse-lite/issues/9).
+    !!! note
+    
+         If you encounter problems with VirtualBox networking try installing
+         [Oracle VM VirtualBox Extension
+         Pack](https://www.virtualbox.org/wiki/Downloads) as suggested by
+         [Issue 202](https://github.com/cloudfoundry/bosh-lite/issues/202).
+         Alternatively make sure you are on VirtualBox 5.1+ since previous
+         versions had a [network connectivity
+         bug](https://github.com/concourse/concourse-lite/issues/9).
 
-4. Install Director VM
-
+4. Install Director VM [](){: #install-director-vm }
+   
     ```shell
     git clone https://github.com/cloudfoundry/bosh-deployment ~/workspace/bosh-deployment
     mkdir -p ~/deployments/vbox
@@ -100,15 +118,15 @@ Run through quick steps below or follow [deploy workflow](basic-workflow.md) tha
 2. Upload stemcell
 
     ```shell
-    bosh -e vbox upload-stemcell \
-      https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent?v=315.45 \
-      --sha1 674cd3c1e64d8c51e62770697a63c07ca04e9bbd
+    bosh upload-stemcell \
+      --sha1 267807792b3a894748d53959afb0ce14310b2fa6 \
+      "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-noble?v=1.425"
     ```
 
 3. Deploy example deployment
 
     ```shell
-    bosh -e vbox -d zookeeper deploy <(wget -O- https://raw.githubusercontent.com/cppforlife/zookeeper-release/master/manifests/zookeeper.yml)
+    bosh -e vbox -d zookeeper deploy <(wget -O- https://git.sr.ht/~achrinza/bosh-zookeeper-release/blob/main/manifests/zookeeper.yml)
     ```
 
 4. Run Zookeeper smoke tests
