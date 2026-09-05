@@ -656,7 +656,7 @@ dummy/cbb84b42-e6a6-4b4d-b560-e418177d2d6f ... z2
 
 ## Migrating from Bosh v1 to Bosh v2 first-class AZs
 
-Previously with “*Bosh v1*” deployment manifests, to spread resources over
+Previously with “*BOSH v1*” deployment manifests, to spread resources over
 multiple availability zones (AZs), deployment jobs, resource pools, and
 networks had to be duplicated and named differently in the deployment
 manifest. By convention, all of these resources were suffixed with `_z1` or
@@ -668,7 +668,11 @@ eliminate and/or simplify manual configuration for balancing instances (VMs)
 across AZs and IP address management.
 
 !!! Caveat
-    From a “*Bosh v1*” director, once you opt into using the “*Bosh v2*” Cloud
-    Config, all deployments must be converted to use new format. There is no
-    way back to “*Bosh v1*” deployment manifests after you've opted in to
-    Cloud Config.
+
+    If you are using director version between v241 and v256, once you
+    opt into using cloud config all deployments must be converted to use new
+    format. If you want to deploy both v1 and v2 manifests, update to director
+    v257+.
+
+    Support for v1 manifests was fully removed from director
+    [v270](https://github.com/cloudfoundry/bosh/releases/tag/v270.0.0).

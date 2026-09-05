@@ -1,7 +1,14 @@
 # Deployment Manifest v1
 
 !!! note
-    Once you opt into using cloud config all deployments must be converted to use manifest v2 format that disallows IaaS specific configuration. See [manifest v2 schema](manifest-v2.md) for allowed configurations. v257+ supports deploying both v1 and v2 manifests to the same director.
+
+    Once you opt into using cloud config all deployments must be converted to
+    use manifest v2 format that disallows IaaS specific configuration. See
+    [manifest v2 schema](manifest-v2.md) for allowed configurations. v257+
+    supports deploying both v1 and v2 manifests to the same director.
+
+    Support for v1 manifests was fully removed from director
+    [v270](https://github.com/cloudfoundry/bosh/releases/tag/v270.0.0).
 
 The deployment manifest is a YAML file that defines the components and properties of the deployment. When an operator initiates a new deployment using the CLI, the Director receives a version of the deployment manifest and creates a new deployment using this manifest.
 
