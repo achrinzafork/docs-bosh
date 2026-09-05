@@ -1,6 +1,10 @@
 # VirtualBox CPI Cloud Properties
 
-This topic describes cloud properties for different resources created by the [VirtualBox CPI](https://bosh.io/releases/github.com/cloudfoundry/bosh-virtualbox-cpi-release). VirtualBox CPI works with [vSphere ESXI stemcells](https://bosh.io/stemcells/bosh-vsphere-esxi-ubuntu-xenial-go_agent).
+This topic describes cloud properties for different resources created by the
+[VirtualBox
+CPI](https://bosh.io/releases/github.com/cloudfoundry/bosh-virtualbox-cpi-release).
+VirtualBox CPI works with [vSphere ESXI
+stemcells](https://bosh.io/stemcells/bosh-vsphere-esxi-ubuntu-xenial-go_agent).
 
 ## AZs {: #azs }
 
@@ -44,8 +48,23 @@ Schema for `cloud_properties` section:
 
 - **cpus** [Integer, optional]: Number of CPUs. Example: `1`. Default: `1`.
 - **memory** [Integer, optional]: RAM in megabytes. Example: `1024`. Default: `512`.
-- **ephemeral_disk** [Integer, optional]: Ephemeral disk size in megabytes. Example: `10240`. Default: `5000`.
-- **paravirtprovider** [String, optional]: Paravirtual provider type. See [`VBoxManage modifyvm` general settings](https://www.virtualbox.org/manual/ch08.html#idp46691713664256) for valid values. Default: `minimal`.
+- **ephemeral_disk** [Integer, optional]: Ephemeral disk size in
+  megabytes. Example: `10240`. Default: `5000`.
+- **audio** [String, optional]: Audio type (`none`, `null`, `dsound`, `oss`,
+  `alsa`, `pulse`, `coreaudio`). See [`VBoxManage modifyvm` general
+  settings](https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm)
+  for valid values. Default: `none`.
+- **firmware** [String, optional]: Firmware type (`bios`, `efi`, `efi32`, or
+  `efi64`). See ['VboxManage modifyvm general
+  settings](https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm).
+  Default: `efi64`.
+- **GUI** [Boolean, optional]:
+- **paravirtprovider** [String, optional]: Paravirtual provider type. See
+  [`VBoxManage modifyvm` general
+  settings](https://www.virtualbox.org/manual/ch08.html#idp46691713664256) for
+  valid values. Default: `minimal`.
+- **shared_folders** [Array, optional]
+    - **host_path** [String, required]
 
 Example of a VM type:
 
