@@ -26,7 +26,7 @@ Make sure to properly delete created resources if VM cannot be successfully crea
 
 For the Agent to successfully start on the created VM, several bootstrapping settings must be exposed which include network configuration, message bus location (NATS/HTTPS), agent id, etc. Each infrastructure might have a different way of providing such settings to the Agent. For example AWS CPI uses instance user metadata and BOSH Registry. vSphere CPI uses CDROM drive. Most CPIs choose to communicate with default Agent hence communication settings follow certain format:
 
-```yaml
+```json
 {
   "agent_id": "4149ba0f-38d9-4485-476f-1581be36f290",
 

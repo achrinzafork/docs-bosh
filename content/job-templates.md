@@ -13,7 +13,7 @@ Assuming we have a job `web-server` with a following `config.json` ERB template:
 
 port = p("port")
 
-if port &lt; 1024 or port &gt; 4000
+if port < 1024 or port > 4000
   raise "Ports lower than 1024 or higher than 4000 are not allowed"
 end
 

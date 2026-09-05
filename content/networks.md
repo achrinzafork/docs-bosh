@@ -32,8 +32,7 @@ Networking configuration is usually done in three steps:
 
 All deployment manifests have a similar structure in terms of network definitions and associations:
 
-```yaml
-# cloud-config.yml
+```yaml title="Cloud Config"
 ---
 networks:
 - name: my-network
@@ -44,8 +43,9 @@ networks:
 
   # IaaS specific attributes
   cloud_properties: { ... }
+```
 
-# deployment.yml
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-instance-group
@@ -96,7 +96,7 @@ Schema for manual network definition:
 
 Example cloud config:
 
-```yaml
+```yaml title="Cloud Config"
 networks:
 - name: my-network
   type: manual
@@ -123,7 +123,7 @@ networks:
 
 Manual networks use automatic IP reservation by default. They also support static IP reservation. To assign specific IPs to instances of the instance group, they must be specified in instance group's `networks` section, in the `static_ips` property for the associated network. That network's subnet definition must also specify them in its `static` property:
 
-```yaml
+```yaml title="Deployment Manifest"
 instance_groups:
 - name: my-instance-group-with-static-ip
   instances: 2
@@ -145,7 +145,7 @@ When the `prefix` property is set, the Director assigns prefix delegations of th
 
 **Example cloud config:**
 
-```yaml
+```yaml title="Cloud Config"
 networks:
 - name: my-network-with-prefix
   type: manual
@@ -174,11 +174,11 @@ The IP and prefix information will get send to the CPI via the `create_vm` RPC i
 
 **Considering the following instance group configuration:**
 
-```yaml
+```yaml title="Deployment Manifest"
 instance_groups:
 - name: my-instance-group-with-static-ip
   instances: 2
-  ...
+   ...
   networks:
   - name: my-network
     default: 
@@ -221,7 +221,7 @@ Schema for dynamic network definition:
 
 Example cloud config:
 
-```yaml
+```yaml title="Cloud Config"
 networks:
 - name: my-network
   type: dynamic
@@ -243,7 +243,7 @@ Schema for dynamic network definition with multiple subnets (available in v241+)
 
 Example cloud config:
 
-```yaml
+```yaml title="Cloud Config"
 networks:
 - name: my-network
   type: dynamic
@@ -270,14 +270,14 @@ Schema for VIP network where static IPs are configured in the deployment manifes
 
 Sample cloud config and deployment manifest:
 
-```yaml
-# cloud-config.yml
+```yaml title="Cloud Config"
 ---
 networks:
 - name: my-vip-network
   type: vip
+```
 
-# deployment.yml
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-instance-group
@@ -304,8 +304,7 @@ Schema for VIP network where static IPs are configured in the cloud config for u
 
 Sample cloud config and deployment manifest:
 
-```yaml
-# cloud-config.yml
+```yaml title="Cloud Config"
 ---
 networks:
 - name: my-vip-network
@@ -315,8 +314,9 @@ networks:
     static:
     - 203.0.113.10
     - 203.0.113.12
+```
 
-# deployment.yml
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-instance-group
@@ -340,14 +340,14 @@ To migrate from static IP assignment to automatic IP assignment:
 
 Sample manifests before migration:
 
-```yaml
-# cloud-config.yml
+```yaml title="Cloud Config"
 ---
 networks:
 - name: my-vip-network
   type: vip
+```
 
-# deployment.yml
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-instance-group
@@ -362,8 +362,7 @@ instance_groups:
 
 Sample manifests after migration:
 
-```yaml
-# cloud-config.yml
+```yaml title="Cloud Config"
 ---
 networks:
 - name: my-vip-network
@@ -373,8 +372,9 @@ networks:
     static:
     - 203.0.113.10
     - 203.0.113.12
+```
 
-# deployment.yml
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-instance-group
@@ -397,8 +397,7 @@ The `nic_group` value on the VIP network should match the `nic_group` assigned t
 
 Example deployment manifest:
 
-```yaml
-# cloud-config.yml
+```yaml title="Cloud Config"
 ---
 networks:
 - name: primary-network
@@ -411,8 +410,9 @@ networks:
 
 - name: my-vip-network
   type: vip
+```
 
-# deployment.yml
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-instance-group
@@ -441,8 +441,8 @@ Schema for `default` property:
 
 Example:
 
-```yaml
-# cloud-config.yml
+
+```yaml title="Cloud Config"
 ---
 networks:
 - name: my-network-1
@@ -453,7 +453,9 @@ networks:
   type: dynamic
   dns: [4.4.4.4]
 
-# deployment.yml
+```
+
+```yaml title="Deployment Manifest"
 ---
 instance_groups:
 - name: my-multi-homed-instance-group

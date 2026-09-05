@@ -41,7 +41,7 @@ As of CPI V2, the registry may be avoided if the stemcell API version is suffici
 
 Most CPIs choose to communicate with the default Agent. Hence, the communication settings follow a certain format:
 
-```yaml
+```json
 {
   "agent_id": "4149ba0f-38d9-4485-476f-1581be36f290",
   "vm": { "name": "i-347844" },
@@ -66,7 +66,7 @@ Most CPIs choose to communicate with the default Agent. Hence, the communication
     "persistent": {}
   },
 
-  "mbus": "https://mbus:mbus-password@0.0.0.0:6868"
+  "mbus": "https://mbus:mbus-password@0.0.0.0:6868",
   "ntp": [ "0.pool.ntp.org", "1.pool.ntp.org" ],
   "blobstore": {
     "provider": "local",

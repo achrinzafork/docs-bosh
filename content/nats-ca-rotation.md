@@ -1,6 +1,6 @@
 # Rotating NATS Certificate Authorities
 
-The procedure below rotates the NATS CA and NATS related certificates across the director, health monitor, NATS server, and all the deployed VMs. It can be used whether the certificates are still valid or have already expired. See [Components of Bosh](bosh-components.md) for more information on core components.
+The procedure below rotates the NATS CA and NATS related certificates across the director, health monitor, NATS server, and all the deployed VMs. It can be used whether the certificates are still valid or have already expired. See [Components of BOSH](bosh-components.md) for more information on core components.
 
 ## Before you start
 
@@ -51,9 +51,7 @@ bosh create-env ~/workspace/bosh-deployment/bosh.yml \
 !!! warning
     In the below operations file `add-new-ca.yml`, the `nats_server_tls_2` certificate is generated with the `internal_ip` as the only “Subject Alternative Name”. Please remember to add any other SANs that maybe necessary to your environment.
 
-`add-new-ca.yml`
-
-```yaml
+```yaml title="add-new-ca.yml"
 ---
 - type: replace
   path: /instance_groups/name=bosh/properties/nats/tls/ca?
@@ -152,9 +150,7 @@ bosh create-env ~/workspace/bosh-deployment/bosh.yml \
 - The NATS server is updated to use a new certificate (used to serve TLS connections) signed by the new NATS CA. Also, in this step the NATS server will start to **ONLY** trust client certificates (for mTLS) that were signed by the new CA.
 - All components now communicate using the new CA.
 
-`remove-old-ca.yml`
-
-```yaml
+```yaml title="remove-old-ca.yml"
 ---
 - type: replace
   path: /instance_groups/name=bosh/properties/nats/tls/ca?
@@ -198,9 +194,7 @@ Redeploying all VMs will remove the old NATS CA reference from their agent setti
 
 Operators are encouraged to clean up the credentials file after applying the aforementioned procedure, in order to prevent the old CA from returning in a subsequent `bosh create-env` in error. The following procedure will update the credentials store to replace the old certificate values with the new values generated.
 
-`update_nats_var_values.yml`
-
-```yaml
+```yaml title="update_nats_var_values.yml"
 ---
 - type: replace
   path: /nats_ca

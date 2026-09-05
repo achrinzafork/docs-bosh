@@ -26,9 +26,7 @@ CLI supports three different blobstore providers: `s3`, `gcs`, and `local`.
 
 S3 provider is used for most production releases. It's can be used with any S3-compatible blobstore (in compatibility mode) like Google Cloud Storage and Swift.
 
-### config/final.yml
-
-```yaml
+```yaml title="config/final.yml"
 ---
 blobstore:
   provider: s3
@@ -36,9 +34,7 @@ blobstore:
     bucket_name: <bucket_name>
 ```
 
-### config/private.yml
-
-```yaml
+```yaml title="config/private.yml"
 ---
 blobstore:
   options:
@@ -52,9 +48,7 @@ See [Configuring S3 release blobstore](s3-release-blobstore.md) for details and 
 
 Google Cloud Storage can be used without S3 compatibility mode.
 
-### config/final.yml
-
-```yaml
+```yaml title="config/final.yml"
 ---
 blobstore:
   provider: gcs
@@ -62,11 +56,9 @@ blobstore:
     bucket_name: <bucket_name>
 ```
 
-### config/private.yml
-
 By default, your [Application Default Credentials](https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application) will be used. Alternatively, create a `config/private.yml` file to use a separate JSON key. When using a separate JSON key, ensure that the service account has the privilege "Storage Legacy Bucket Owner" for the GCS bucket:
 
-```yaml
+```yaml title="config/private.yml"
 ---
 blobstore:
   options:
@@ -81,9 +73,7 @@ blobstore:
 
 Local provider is useful for testing.
 
-### config/final.yml
-
-```yaml
+```yaml title="config/final.yml"
 ---
 blobstore:
   provider: local
@@ -98,9 +88,7 @@ Nothing in `config/private.yml`.
 
 Git LFS can be used as a release blobstore by configuring the local provider with blobs managed through Git LFS.
 
-**config/final.yml**
-
-```yaml
+```yaml title="config/final.yml"
 ---
 blobstore:
   provider: local
@@ -108,8 +96,11 @@ blobstore:
     blobstore_path: final_blobs
 ```
 
-**.gitattributes**
-
+```yaml title="config/private.yml"
+---
+blobstore:
+  options:
+    account_key: <account_key>
 ```
 blobs/** filter=lfs diff=lfs merge=lfs -text
 final_blobs/** filter=lfs diff=lfs merge=lfs -text
@@ -129,9 +120,7 @@ See [Using Git LFS as Release Blobstore](git-lfs-release-blobstore.md) for detai
 
 You can control whether the outer release tarball is compressed by setting the `no_compression` flag in `config/final.yml`.
 
-### config/final.yml
-
-```yaml
+```yaml title="config/final.yml"
 ---
 name: my-release
 blobstore:

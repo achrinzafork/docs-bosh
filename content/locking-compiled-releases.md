@@ -14,7 +14,7 @@ will detect a newer compiled release and update many VMs.
 
 Consider a manifest without `exported_from`
 
-```yml
+```yaml
 - name: bpm
   url: https://s3.amazonaws.com/bosh-compiled-release-tarballs/bpm-0.12.3-ubuntu-xenial-250.4.tgz
   version: 0.12.3
@@ -35,7 +35,7 @@ use `exported_from` in the [releases](deployment-manifest.md#releases) block of 
 
 To specify which compiled release to use in a deployment, add `exported_from` to the release:
 
-```yml
+```yaml
 releases:
 - name: bpm
   url: https://s3.amazonaws.com/bosh-compiled-release-tarballs/bpm-0.12.3-ubuntu-xenial-250.4.tgz

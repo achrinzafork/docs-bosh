@@ -80,7 +80,7 @@ In DNS release 1.12, the `recursor_selection` property was added to allow operat
 
 Example with `recursor_selection` set to "smart" (default):
 
-```yml
+```yaml
   jobs:
   - name: bosh-dns
     properties:
@@ -90,7 +90,7 @@ Example with `recursor_selection` set to "smart" (default):
 
 Example with `recursor_selection` set to "serial":
 
-```yml
+```yaml
   jobs:
   - name: bosh-dns
     properties:
@@ -118,7 +118,7 @@ There are two special characters which can be used (see below for example usages
 
 Using the following aliases configuration:
 
-```json
+```json title="/var/vcap/jobs/<job>/dns/aliases.json"
 { "sql-db.service.cf.internal": [
     "*.mysql-z1.default.cf.bosh",
     "*.mysql-z2.default.cf.bosh" ],
@@ -236,15 +236,17 @@ aliases:
 ```
 
 !!! Note
-    When using `placeholder_type: uuid` or `placeholder_type: index`, the
-    value for `health_filter` has some importance. Indeed, when the instance
-    behind the alias is unhealthy, the default `health_filter: smart` will
-    resolve the alias to no address at all, or if you prefer, an empty list of
-    IP addresses. Depending on your use-case, you might expect an `index`- or
-    `uuid`-based alias to always return the IP address of the designated
-    instance, and let clients load-balance the traffic to healthy instances
-    with their own mechanisms. With such use-case, that expects one instance
-    to always be resolved, then opt for `health_filter: all`.
+
+    When using `#!yaml placeholder_type: uuid` or `#!yaml placeholder_type:
+    index`, the value for `health_filter` has some importance. Indeed, when
+    the instance behind the alias is unhealthy, the default `#!yaml
+    health_filter: smart` will resolve the alias to no address at all, or if
+    you prefer, an empty list of IP addresses. Depending on your use-case, you
+    might expect an `index`- or `uuid`-based alias to always return the IP
+    address of the designated instance, and let clients load-balance the
+    traffic to healthy instances with their own mechanisms. With such
+    use-case, that expects one instance to always be resolved, then opt for
+    `#!yaml health_filter: all`.
 
 ###### Parameters in Detail
 
@@ -412,7 +414,7 @@ You can control type of addresses returned at three different levels:
 
 Once native DNS addresses in links are enabled DNS addresses will be returned instead of IPs. Note that links provided by instance groups placed on dynamic networks will always provide DNS addresses.
 
-```ruby
+```ruby title="jobs/<job>/templates/*.erb"
 # before
 link("db").address => "q-s0.db.default.db.bosh"
 link("db").instances[0].address => "172.10.10.0"
@@ -804,7 +806,7 @@ bosh update-runtime-config bosh-deployment/runtime-configs/dns.yml --vars-store 
 
 Each VM receives a local copy of the latest DNS data (via the BOSH agent on the VM) whenever VMs are added or removed from the system. This data file is installed to `/var/vcap/instance/dns/records.json`. Below is an example of the schema...
 
-```json
+```json title="/var/vcap/instance/dns/records.json"
 {
   "record_keys": [
     "id",
