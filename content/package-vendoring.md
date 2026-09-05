@@ -94,6 +94,38 @@ In the above BASH script, `source /var/vcap/packages/golang-1.18-linux/bosh/comp
 
 Packages may also include `bosh/runtime.env` for loading specific functionality at job runtime instead of during package compilation.
 
+### Prefixing Vendored Package Names
+
+!!! note
+
+    This feature requires BOSH CLI
+    [v7.1.3](https://github.com/cloudfoundry/bosh-cli/commit/c39f9dec44a0ab30f31140fd76886ef839f364ed)+.
+
+Packages used by jobs must be uniquely-named within each VM. When two
+different packages of the same name are resolved as job dependencies in a BOSH
+deployment, a package name collision occurs and the deployment will
+fail. Hence, care should be taken when vendoring packages for colocated BOSH
+releases (e.g. CPI providers and Addons).
+
+This restriction does not apply to packages which are only dependencies of
+other packages (i.e. they are only used in the compilation VM). For example,
+prefixing is advised when vendoring Ruby (an interpreted language which will
+have a dependent _job_) but not necessary when vendoring Go (a compiled
+language which will have a dependent _package_).
+
+To add a prefix when (re-)vendoring a package, use the [`--prefix`
+argument](cli-v2.md#vendor-package).
+
+!!! tip
+
+    Historically, authors of packages vendored for job dependencies named them
+    with their version such that only byte-for-byte identical packages shared
+    the same name (such as with
+    [ruby-release](https://github.com/cloudfoundry/bosh/issues/1940#issuecomment-409761228)).
+    Although no longer necessary, matching identical packages with identical
+    names allows for deduplication when the same package version is vendored
+    across multiple releases deployed on the same VM.
+
 ### Additional notes about `vendor-package` command
 
 - The command is idempotent, hence could be run in the CI continuously tracking source release and automatically vendoring in updates.
